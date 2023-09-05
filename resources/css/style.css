@@ -1,0 +1,23 @@
+body {
+    background-color: #38404B;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+.styled-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px;
+    border-radius: 16px;
+}
+
+.svg-button {
+    background-color: #94ADCF;
+    border: none;
+    border-radius: 16px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
