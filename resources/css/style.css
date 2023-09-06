@@ -1,23 +1,53 @@
 body {
-    background-color: #38404B;
+    /* background-color: #38404B; */
+}
+
+h2 {
+    color: #94ADCF;
 }
 
 .input-container {
     display: flex;
     align-items: center;
+    width: 40vw;
+    margin: 0 auto;
+    position: relative;
+}  
+
+.input-container:focus-within {
+    outline: 1px solid black;
+    border-radius: 16px;
 }
 
 .styled-input {
     flex: 1;
-    padding: 10px;
-    border: 1px;
-    border-radius: 16px;
+    box-shadow: inset -2px -2px 4px hsla(0,0%,100%,.1), inset 2px 2px 4px rgba(0,0,0,.35);
+    border-radius: 16px 0 0 16px; 
+    color: #94ADCF;
+}
+
+.styled-input::placeholder {
+    color: #94ADCF;
+}
+
+.styled-input:focus {
+    outline: none;
 }
 
 .svg-button {
-    background-color: #94ADCF;
-    border: none;
-    border-radius: 16px;
-    padding: 10px 15px;
+    /* background-color: #38404B; */
+    background-color: white;
+    box-shadow: inset 0px 2px 4px rgba(0,0,0,.35);
+    border-radius: 0 16px 16px 0;
     cursor: pointer;
+    outline: none;
+    user-select: none;
+}
+
+.styled-input,
+.svg-button {
+    height: 44px;
+    padding: 10px;
+    border: none;
+    width: auto;
 }
