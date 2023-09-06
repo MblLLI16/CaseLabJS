@@ -1,24 +1,27 @@
 @font-face {
     font-family: "Ubuntu";
-    src: url("./fonts/Ubuntu-Regular.woff2") format("woff2");
+    src: url("../fonts/Ubuntu-Regular.woff2") format("woff2");
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: "Ubuntu";
-    src: url("./fonts/Ubuntu-Medium.woff2") format("woff2");
-    font-weight: 400;
-    font-style: medium;
+    src: url("../fonts/Ubuntu-Medium.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
     font-display: swap;
 }
 
 body {
+    font-family: "Ubuntu";
     background-color: #38404B;
 }
 
 h2 {
     color: #94ADCF;
+    line-height: 28px;   
 }
 
 .input-container {
@@ -29,15 +32,16 @@ h2 {
     position: relative;
 }  
 
-.input-container:focus-within {
-    outline: 1px solid black;
-    border-radius: 16px;
+h2,
+.input-container {
+    font-weight: 400;
 }
 
 .styled-input {
     flex: 1;
     box-shadow: inset -2px -2px 4px hsla(0,0%,100%,.1), inset 2px 2px 4px rgba(0,0,0,.35);
     border-radius: 16px 0 0 16px; 
+    padding: 20px;
     color: #94ADCF;
 }
 
@@ -50,8 +54,9 @@ h2 {
 }
 
 .svg-button {
-    box-shadow: inset 0px 2px 4px rgba(0,0,0,.35);
+    box-shadow: inset -2px -2px 4px hsla(0,0%,100%,.1), inset 2px 2px 4px rgba(0,0,0,.35);
     border-radius: 0 16px 16px 0;
+    padding: 10px;
     cursor: pointer;
     outline: none;
     user-select: none;
@@ -60,8 +65,18 @@ h2 {
 .styled-input,
 .svg-button {
     height: 44px;
-    padding: 10px;
     border: none;
     width: auto;
     background-color: #38404B;
+}
+
+.todo,
+.completed {
+    font-weight: 700;
+}
+
+.task-list h2 {
+    position: absolute;
+    margin-top: 10vh;
+    left: 15%;/*It's position need to change*/
 }
