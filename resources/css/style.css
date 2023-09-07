@@ -63,7 +63,8 @@ h2,
 }
 
 .styled-input,
-.svg-button {
+.svg-button,
+.todo li {
     height: 44px;
     border: none;
     width: auto;
@@ -75,8 +76,48 @@ h2,
     font-weight: 700;
 }
 
+.task-list {
+    margin: 10vh 20vh;
+}
 .task-list h2 {
     position: absolute;
     margin-top: 10vh;
-    left: 15%;/*It's position need to change*/
+    left: 15%;
+    /*It's position need to change*/   
+}
+
+.todo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.todo li {
+    box-shadow: -2px -2px 4px 2px hsla(0,0%,100%,.1), 2px 2px 4px 2px rgba(0,0,0,.35);
+    border-radius: 16px;
+    padding: 10px;/*50px*/
+    outline: none;
+    width: 30vw;
+    margin: 5vh;
+}
+
+.todo li::before {
+    content: '';
+    display: inline-block; /* Добавляем это свойство */
+    width: 18px;
+    height: 18px;
+    border: 2px solid #94ADCF;
+    border-radius: 50%;
+    margin-right: 20px; /* Добавляем небольшой отступ справа от круга */
+  }
+  
+
+/* Добавляем стили для текста задачи */
+.styled-list li::after {
+    content: attr(data-button-text); /* Значение из data-атрибута */
+    display: inline-block;
+    margin-left: 10px; /* Расстояние между кружком и текстом */
+  }
+
+.todo li {
+    color: #94ADCF;
 }
