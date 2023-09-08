@@ -21,7 +21,7 @@ body {
 
 h2 {
     color: #94ADCF;
-    line-height: 28px;   
+    line-height: 28px;
 }
 
 .input-container {
@@ -30,7 +30,7 @@ h2 {
     width: 40vw;
     margin: 0 auto;
     position: relative;
-}  
+}
 
 h2,
 .input-container {
@@ -39,8 +39,8 @@ h2,
 
 .styled-input {
     flex: 1;
-    box-shadow: inset -2px -2px 4px hsla(0,0%,100%,.1), inset 2px 2px 4px rgba(0,0,0,.35);
-    border-radius: 16px 0 0 16px; 
+    box-shadow: inset -2px -2px 4px hsla(0, 0%, 100%, .1), inset 2px 2px 4px rgba(0, 0, 0, .35);
+    border-radius: 16px 0 0 16px;
     padding: 20px;
     color: #94ADCF;
 }
@@ -54,7 +54,7 @@ h2,
 }
 
 .svg-button {
-    box-shadow: inset -2px -2px 4px hsla(0,0%,100%,.1), inset 2px 2px 4px rgba(0,0,0,.35);
+    box-shadow: inset -2px -2px 4px hsla(0, 0%, 100%, .1), inset 2px 2px 4px rgba(0, 0, 0, .35);
     border-radius: 0 16px 16px 0;
     padding: 10px;
     cursor: pointer;
@@ -64,7 +64,8 @@ h2,
 
 .styled-input,
 .svg-button,
-.todo li {
+.todo li,
+.completed li {
     height: 44px;
     border: none;
     width: auto;
@@ -79,20 +80,22 @@ h2,
 .task-list {
     margin: 10vh 20vh;
 }
+
 .task-list h2 {
-    position: absolute;
-    margin-top: 10vh;
-    left: 15%;
-    /*It's position need to change*/   
+    margin-left: 5vh;
 }
 
+/* todo style */
 .todo {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
 .todo li {
-    box-shadow: -2px -2px 4px 2px hsla(0,0%,100%,.1), 2px 2px 4px 2px rgba(0,0,0,.35);
+    display: flex;
+    align-items: center;
+    box-shadow: -2px -2px 4px 2px hsla(0, 0%, 100%, .1), 2px 2px 4px 2px rgba(0, 0, 0, .35);
     border-radius: 16px;
     padding: 10px;/*50px*/
     outline: none;
@@ -100,24 +103,72 @@ h2,
     margin: 5vh;
 }
 
+.todo li {
+    color: #94ADCF;
+}
+
 .todo li::before {
     content: '';
-    display: inline-block; /* Добавляем это свойство */
+    display: inline-block;
     width: 18px;
     height: 18px;
     border: 2px solid #94ADCF;
     border-radius: 50%;
-    margin-right: 20px; /* Добавляем небольшой отступ справа от круга */
-  }
-  
+    margin-right: 20px;
+    cursor: pointer;
+}
 
-/* Добавляем стили для текста задачи */
-.styled-list li::after {
-    content: attr(data-button-text); /* Значение из data-атрибута */
+.todo li::after
+{
+    content: url('../assets/Vector.svg');
     display: inline-block;
-    margin-left: 10px; /* Расстояние между кружком и текстом */
-  }
+    width: 18px;
+    height: 18px;
+    padding-left: 200px;/*нужно отвязывать от текста*/
+    cursor: pointer;
+}
 
-.todo li {
+/* completed style */
+.completed {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.completed li {
+    display: flex;
+    align-items: center;
+    box-shadow: -2px -2px 4px 2px hsla(0, 0%, 100%, .1), 2px 2px 4px 2px rgba(0, 0, 0, .35);
+    border-radius: 16px;
+    padding: 10px;
+    outline: none;
+    width: 30vw;
+    margin: 5vh;
+}
+
+.completed li {
     color: #94ADCF;
+    text-decoration: line-through;
+}
+
+.completed li::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #94ADCF;
+    border-radius: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+    background-color: #94ADCF;
+}
+
+.completed li::after
+{
+    content: url('../assets/Vector.svg');
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    padding-left: 100px;/*нужно отвязывать от текста*/
+    cursor: pointer;
 }
