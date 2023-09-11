@@ -3,6 +3,15 @@ console.log('lol')
 const addButton = document.getElementById('add');
 const input = document.querySelector('.styled-input');
 
+document.addEventListener('keydown', (event) => {
+    if (document.activeElement !== input) {
+        if (event.key === '/') {
+            event.preventDefault();
+            input.focus();
+        }
+    }
+})
+
 addButton.addEventListener('click', () => {
     const userInput = document.getElementsByTagName('input')[0];
     if (userInput.value) {
