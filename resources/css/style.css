@@ -93,13 +93,12 @@ h2,
 }
 
 .todo li {
-    display: flex;
-    align-items: center;
     box-shadow: -2px -2px 4px 2px hsla(0, 0%, 100%, .1), 2px 2px 4px 2px rgba(0, 0, 0, .35);
     border-radius: 16px;
     padding: 10px;/*50px*/
     outline: none;
     width: 30vw;
+    min-height: 24px;
     margin: 5vh;
 }
 
@@ -107,25 +106,24 @@ h2,
     color: #94ADCF;
 }
 
-.todo li::before {
-    content: '';
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #94ADCF;
-    border-radius: 50%;
+.check-button {
+    float: left;
     margin-right: 20px;
-    cursor: pointer;
 }
 
-.todo li::after
-{
-    content: url('../assets/Vector.svg');
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    padding-left: 200px;/*нужно отвязывать от текста*/
+.del-button {
+    float: right;
+    margin-left: 5px;
+    margin-right: 35px;
+}
+
+.check-button,
+.del-button {
+    border: none;
     cursor: pointer;
+    outline: none;
+    height: 100%;
+    background-color: #38404B;
 }
 
 /* completed style */
@@ -136,39 +134,16 @@ h2,
 }
 
 .completed li {
-    display: flex;
-    align-items: center;
     box-shadow: -2px -2px 4px 2px hsla(0, 0%, 100%, .1), 2px 2px 4px 2px rgba(0, 0, 0, .35);
     border-radius: 16px;
     padding: 10px;
     outline: none;
     width: 30vw;
+    min-height: 24px;
     margin: 5vh;
 }
 
 .completed li {
     color: #94ADCF;
     text-decoration: line-through;
-}
-
-.completed li::before {
-    content: '';
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #94ADCF;
-    border-radius: 50%;
-    margin-right: 20px;
-    cursor: pointer;
-    background-color: #94ADCF;
-}
-
-.completed li::after
-{
-    content: url('../assets/Vector.svg');
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    padding-left: 100px;/*нужно отвязывать от текста*/
-    cursor: pointer;
 }

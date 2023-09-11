@@ -16,7 +16,7 @@
   <header>
     <h1>To Do List</h1>
   </header>
-  
+
   <main>
 
     <section class="add-task">
@@ -25,7 +25,7 @@
         <input type="text" class="styled-input" name="input" placeholder="Add new task" accesskey="/" />
 
         <button class="svg-button" id="add">
-          <img src="./resources/assets/Enter.svg" />
+          <img src="./resources/assets/Enter.svg" alt="enter-icon" />
         </button>
 
       </figure>
@@ -35,17 +35,29 @@
     <section class="task-list">
 
       <ul class="todo">
-        <!-- <li>User task</li>
-        <li>User task</li>
-        <li>User task</li> -->
+        <li>
+          User task
+          <button class="check-button">
+            <img src="./resources/assets/unCheckIcon.svg" class="check-icon" alt="Check Icon">
+          </button>
+          <button class="del-button">
+            <img src="./resources/assets/Vector.svg" class="delete-icon" alt="Delete Icon">
+          </button>
+        </li>
       </ul>
 
       <h2>Completed</h2>
 
       <ul class="completed">
-        <li>User task completed</li>
-        <li>User task completed</li>
-        <li>User task completed</li>
+        <li>
+          User task completed
+          <button class="check-button">
+            <img src="./resources/assets/CheckIcon.svg" class="check-icon" alt="Check Icon">
+          </button>
+          <button class="del-button">
+            <img src="./resources/assets/Vector.svg" class="delete-icon" alt="Delete Icon">
+          </button>
+        </li>
       </ul>
 
     </section>

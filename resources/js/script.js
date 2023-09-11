@@ -17,8 +17,8 @@ function addItemTodoList(text) {
     listItem.innerText = text;
 
     const deleteButton = document.createElement('button');
-    deleteButton.innerText = 'Delete';
-    deleteButton.classList.add('delete-button');
+    deleteButton.style.backgroundImage = 'url("./resources/assets/Vector.svg")';
+    deleteButton.innerText = '';
     deleteButton.addEventListener('click', () => {
         todoList.removeChild(listItem);
     });
