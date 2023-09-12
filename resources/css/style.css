@@ -72,6 +72,12 @@ h2,
     background-color: #38404B;
 }
 
+.emptyInputMessage {
+    color:  #FF5733;
+    position: absolute;
+    left: 20vw;
+}
+
 .todo,
 .completed {
     font-weight: 700;

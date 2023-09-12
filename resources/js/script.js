@@ -10,22 +10,39 @@ document.addEventListener('keydown', (event) => {
             input.focus();
         }
     }
+    if (document.activeElement === input) {
+        if (event.key === 'Escape') {
+            input.blur();
+        }
+    }
 })
 
 addButton.addEventListener('click', () => {
-    const userInput = document.getElementsByTagName('input')[0];
+    const userInput = input;
     if (userInput.value) {
         addItemTodoList(userInput.value);
         userInput.value = '';
     }
 })
 
+const emptyInputMessage = document.createElement('span');
+const inputContainer = document.querySelector('.input-container');
+
+emptyInputMessage.className = 'emptyInputMessage';
+emptyInputMessage.textContent = 'Поле ввода пусто';
+
 input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        const userInput = document.getElementsByTagName('input')[0];
+        const userInput = input;
         if (userInput.value) {
             addItemTodoList(userInput.value);
             userInput.value = '';
+
+            emptyInputMessage.style.display = 'none';
+            inputContainer.appendChild(emptyInputMessage);
+        } else {
+            emptyInputMessage.style.display = 'block';
+            inputContainer.appendChild(emptyInputMessage);
         }
     }
 })
