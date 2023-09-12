@@ -1,29 +1,7 @@
 console.log('lol')
 
 const addButton = document.getElementById('add');
-const input = document.querySelector('.styled-input');
-
-document.addEventListener('keydown', (event) => {
-    if (document.activeElement !== input) {
-        if (event.key === '/') {
-            event.preventDefault();
-            input.focus();
-        }
-    }
-    if (document.activeElement === input) {
-        if (event.key === 'Escape') {
-            input.blur();
-        }
-    }
-})
-
-addButton.addEventListener('click', () => {
-    const userInput = input;
-    if (userInput.value) {
-        addItemTodoList(userInput.value);
-        userInput.value = '';
-    }
-})
+const userInput = document.querySelector('.styled-input');
 
 const emptyInputMessage = document.createElement('span');
 const inputContainer = document.querySelector('.input-container');
@@ -31,21 +9,7 @@ const inputContainer = document.querySelector('.input-container');
 emptyInputMessage.className = 'emptyInputMessage';
 emptyInputMessage.textContent = 'Поле ввода пусто';
 
-input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        const userInput = input;
-        if (userInput.value) {
-            addItemTodoList(userInput.value);
-            userInput.value = '';
-
-            emptyInputMessage.style.display = 'none';
-            inputContainer.appendChild(emptyInputMessage);
-        } else {
-            emptyInputMessage.style.display = 'block';
-            inputContainer.appendChild(emptyInputMessage);
-        }
-    }
-})
+listeners();
 
 function addItemTodoList(text) {
     const todoList = document.querySelector('.todo');
@@ -94,4 +58,51 @@ function addItemTodoList(text) {
     listItem.appendChild(checkButton);
     listItem.appendChild(delButton);
     todoList.appendChild(listItem);
+}
+
+function listeners() {
+    document.addEventListener('keydown', (event) => {
+        if (document.activeElement !== userInput) {
+            if (event.key === '/') {
+                event.preventDefault();
+                userInput.focus();
+            }
+        }
+        if (document.activeElement === userInput) {
+            if (event.key === 'Escape') {
+                userInput.blur();
+            }
+        }
+    })
+
+    addButton.addEventListener('click', () => {
+        // const userInput = input;
+        if (userInput.value) {
+            addItemTodoList(userInput.value);
+            userInput.value = '';
+        }
+    })
+
+    userInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            if (userInput.value) {
+                addItemTodoList(userInput.value);
+                userInput.value = '';
+
+                emptyInputMessage.style.display = 'none';
+                inputContainer.appendChild(emptyInputMessage);
+            } else {
+                emptyInputMessage.style.display = 'block';
+                inputContainer.appendChild(emptyInputMessage);
+            }
+        }
+    })
+
+    userInput.addEventListener('input', () => {
+        if (userInput.value) {
+            console.log('зашли в обработчик скрытия при вводе')
+            emptyInputMessage.style.display = 'none';
+            inputContainer.appendChild(emptyInputMessage);
+        }
+    })
 }
