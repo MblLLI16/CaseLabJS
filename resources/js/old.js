@@ -1,28 +1,15 @@
-const data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem('todoList')) : {
+console.log('lol')
+const data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem('todoList')): {
     todo: [],
     completed: []
 };
 
-renderTodoList();
-inputHandler();
+listeners();
 
 
-function renderTodoList() {
-    if (!data.todo.length && data.completed.length) return;
-
-    for (let i = 0; i < data.todo.length; i++) {
-        let value = data.todo[i];
-        addItemToDOM(value, 'todo');
-    }
-
-    for (let j = 0; j < data.todo.length; j++) {
-        let value = data.completed[i];
-        addItemToDOM(value, 'completed');
-    }
-}
-
-function addItemToDOM(text, status) {
-    let list = (status === 'completed') ? document.getElementById('completed') : document.getElementById('todo');
+function addItemTodoList(text) {
+    const todoList = document.querySelector('.todo');
+    const completed = document.querySelector('.completed');
 
     const listItem = document.createElement('li');
     listItem.innerText = text;
@@ -47,7 +34,7 @@ function addItemToDOM(text, status) {
             checkIcon.src = './resources/assets/unCheckIcon.svg';
             saveTaskToLocalStorage(text, taskType = 'todo');//save при смене типа таски
         } else (console.log('Ошибка checkButton'))
-    });
+    })
 
     const delButton = document.createElement('button');
     delButton.className = 'del-button';
@@ -65,27 +52,16 @@ function addItemToDOM(text, status) {
         } else if (completed.contains(listItem)) {
             completed.removeChild(listItem);
         } else (console.log('Ошибка delButton'))
+
     });
 
+    saveTaskToLocalStorage(text, taskType = 'todo');
     listItem.appendChild(checkButton);
     listItem.appendChild(delButton);
     todoList.appendChild(listItem);
-
-    list.insertBefore(todoList, list.childNodes[0]);
 }
 
-function saveTaskToLocalStorage(taskText, taskType) {
-
-    if (taskType === 'todo') {
-        data.todo.push(taskText);
-    } else if (taskType === 'completed') {
-        data.completed.push(taskText);
-    }
-    localStorage.setItem('todoList', JSON.stringify(data));
-    console.log(`saveTaskToLocalStorage call, ${taskType}`);
-}
-
-function inputHandler() {
+function listeners() {
 
     const addButton = document.getElementById('add');
     const userInput = document.querySelector('.styled-input');
@@ -95,7 +71,6 @@ function inputHandler() {
 
     emptyInputMessage.className = 'emptyInputMessage';
     emptyInputMessage.textContent = 'Поле ввода пусто';
-
 
     document.addEventListener('keydown', (event) => {
         if (document.activeElement !== userInput) {
@@ -113,7 +88,7 @@ function inputHandler() {
 
     addButton.addEventListener('click', () => {
         if (userInput.value) {
-           
+            addItemTodoList(userInput.value);
             userInput.value = '';
         } else {
             emptyInputMessage.style.display = 'block';
@@ -124,7 +99,7 @@ function inputHandler() {
     userInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             if (userInput.value) {
-                addItemTodoList(userInput.value);//
+                addItemTodoList(userInput.value);
                 userInput.value = '';
             } else {
                 emptyInputMessage.style.display = 'block';
@@ -139,4 +114,29 @@ function inputHandler() {
             inputContainer.appendChild(emptyInputMessage);
         }
     })
+} 
+
+function saveTaskToLocalStorage(taskText, taskType) {
+
+    const data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem('todoList')): {
+        todo: [],
+        completed: []
+    };
+    
+    // if(taskType === 'todo') {
+    //     data.todo.push(taskText);
+    // } else if(taskType === 'completed') {
+    //     data.completed.push(taskText);
+    // }
+    // localStorage.setItem('todoList', JSON.stringify('data'))
+    console.log(`saveTaskToLocalStorage call, ${taskType}`)
+}
+
+function loadTasksFromLocalStorage() {
+    localStorage.getItem('todoList')
+    console.log('loadTasksFromLocalStorage call')
+}
+
+function deleteTaskFromLocalStorage(taskText) {
+    console.log('deleteTaskFromLocalStorage call')
 }
