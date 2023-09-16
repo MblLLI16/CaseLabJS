@@ -113,7 +113,7 @@ function inputHandler() {
 
     addButton.addEventListener('click', () => {
         if (userInput.value) {
-           
+            
             userInput.value = '';
         } else {
             emptyInputMessage.style.display = 'block';
