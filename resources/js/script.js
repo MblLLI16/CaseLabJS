@@ -3,10 +3,6 @@ const data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getIte
     completed: []
 };
 
-console.log(data);
-console.log(data.todo);
-console.log(data.completed);
-
 renderTodoList();
 inputHandler();
 
@@ -32,8 +28,6 @@ function renderTodoList() {
 }
 
 function addItemToDOM(text, status) {
-    let list = (status === 'completed') ? document.getElementById('completed') : document.getElementById('todo');
-
     const todoList = document.querySelector('.todo');
     const completed = document.querySelector('.completed');
 
@@ -81,11 +75,15 @@ function addItemToDOM(text, status) {
         removeItem(listItem)
     });
 
-    listItem.appendChild(checkButton);
-    listItem.appendChild(delButton);
-    todoList.appendChild(listItem);
-
-    // list.insert(todoList, list.childNodes[0]);
+    if (status === 'completed') {
+        listItem.appendChild(checkButton);
+        listItem.appendChild(delButton);
+        completed.appendChild(listItem);
+    } else if (status === 'todo') {
+        listItem.appendChild(checkButton);
+        listItem.appendChild(delButton);
+        todoList.appendChild(listItem);
+    }
 }
 
 function saveTaskToLocalStorage(taskText, taskType) {
@@ -96,7 +94,6 @@ function saveTaskToLocalStorage(taskText, taskType) {
         data.completed.push(taskText);
     }
     localStorage.setItem('todoList', JSON.stringify(data));
-    console.log(`saveTaskToLocalStorage call, ${taskType}`);
 }
 
 function inputHandler() {
@@ -170,7 +167,7 @@ function inputHandler() {
         // Перебор всех элементов li и применение стиля к четным элементам
         todoListItems.forEach((item, index) => {
             if (index % 2 === 1) { // Четные элементы (индексы с 0)
-                item.style.color = isEvenHighlighted ? '' : 'red'; 
+                item.style.color = isEvenHighlighted ? '' : 'red';
             }
         });
     });
@@ -180,16 +177,16 @@ function inputHandler() {
         // Перебор всех элементов li и применение стиля к нечетным элементам
         todoListItems.forEach((item, index) => {
             if (index % 2 === 0) { // Нечетные элементы (индексы с 0)
-                item.style.color = isEvenHighlighted ? '' : 'red'; 
+                item.style.color = isEvenHighlighted ? '' : 'red';
             }
         });
     })
 
     delFirstElementButton.addEventListener('click', () => {
-        const todoList = document.querySelector('.task-list'); 
-        const firstListItem = todoList.querySelector('li'); 
-    
-        if (firstListItem) { 
+        const todoList = document.querySelector('.task-list');
+        const firstListItem = todoList.querySelector('li');
+
+        if (firstListItem) {
             removeItem(firstListItem);
         }
     });
@@ -198,11 +195,11 @@ function inputHandler() {
         const todoList = document.querySelector('.task-list');
         const lastListItem = todoList.querySelector('li:last-child');
 
-        if(lastListItem) {
+        if (lastListItem) {
             removeItem(lastListItem);
         }
     })
-    
+
 }
 
 function removeItem(itemToRemove) {
@@ -225,9 +222,4 @@ function removeItem(itemToRemove) {
 
 function dataObjectUpdated() {
     localStorage.setItem('todoList', JSON.stringify(data));
-
-    console.log('after removeItem and dataObjectUpdated func')
-    console.log(data);
-    console.log(data.todo);
-    console.log(data.completed);
 }
