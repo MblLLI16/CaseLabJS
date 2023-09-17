@@ -53,12 +53,19 @@ function addItemToDOM(text, status) {
             completed.appendChild(listItem);
             listItem.classList.add('.completed')
             checkIcon.src = './resources/assets/CheckIcon.svg';
-            saveTaskToLocalStorage(text, taskType = 'completed');//save при смене типа таски
+            saveTaskToLocalStorage(text, taskType = 'completed');
+
+            data.todo.splice(data.todo.indexOf(text), 1);
+            dataObjectUpdated();
+
         } else if (completed.contains(listItem)) {
             todoList.appendChild(listItem);
             listItem.classList.add('.todo')
             checkIcon.src = './resources/assets/unCheckIcon.svg';
-            saveTaskToLocalStorage(text, taskType = 'todo');//save при смене типа таски
+            saveTaskToLocalStorage(text, taskType = 'todo');
+
+            data.completed.splice(data.completed.indexOf(text), 1);
+            dataObjectUpdated();
         } else (console.log('Ошибка checkButton'))
     });
 
@@ -71,13 +78,7 @@ function addItemToDOM(text, status) {
     delButton.appendChild(delIcon);
 
     delButton.addEventListener('click', () => {
-        if (todoList.contains(listItem)) {
-            todoList.removeChild(listItem);
-            deleteTaskFromLocalStorage(text)
-
-        } else if (completed.contains(listItem)) {
-            completed.removeChild(listItem);
-        } else (console.log('Ошибка delButton'))
+        removeItem(listItem)
     });
 
     listItem.appendChild(checkButton);
@@ -126,13 +127,8 @@ function inputHandler() {
 
     addButton.addEventListener('click', () => {
         if (userInput.value) {
-            // сохранение userInput в data object, вызов render. Это для работы добавления элемента. 
-            // addItemTodoList(userInput.value);
-            // data = ...
-            saveTaskToLocalStorage(userInput.value, taskType = 'todo')
-            //возможно, после сохранения Task нужно заново вызывать рендер для обновления элементов
-            // (рендер)
-            renderTodoList()
+            saveTaskToLocalStorage(userInput.value, taskType = 'todo');
+            renderTodoList();
             userInput.value = '';
         } else {
             emptyInputMessage.style.display = 'block';
@@ -143,7 +139,8 @@ function inputHandler() {
     userInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             if (userInput.value) {
-                addItemTodoList(userInput.value);//
+                saveTaskToLocalStorage(userInput.value, taskType = 'todo');
+                renderTodoList();
                 userInput.value = '';
             } else {
                 emptyInputMessage.style.display = 'block';
@@ -158,4 +155,31 @@ function inputHandler() {
             inputContainer.appendChild(emptyInputMessage);
         }
     })
+}
+
+function removeItem(itemToRemove) {
+    let parent = itemToRemove.parentNode;
+
+    if (parent) {
+        let parentClass = parent.classList;
+        let value = itemToRemove.innerText;
+
+        if (parentClass.contains('todo')) {
+            data.todo.splice(data.todo.indexOf(value), 1);
+        } else {
+            data.completed.splice(data.completed.indexOf(value), 1);
+        }
+        dataObjectUpdated();
+
+        parent.removeChild(itemToRemove);
+    }
+}
+
+function dataObjectUpdated() {
+    localStorage.setItem('todoList', JSON.stringify(data));
+
+    console.log('after removeItem and dataObjectUpdated func')
+    console.log(data);
+    console.log(data.todo);
+    console.log(data.completed);
 }
