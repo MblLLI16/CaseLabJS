@@ -85,7 +85,7 @@ function addItemToDOM(text, status) {
     listItem.appendChild(delButton);
     todoList.appendChild(listItem);
 
-    // list.insertBefore(listItem, list.childNodes[0]);
+    // list.insert(todoList, list.childNodes[0]);
 }
 
 function saveTaskToLocalStorage(taskText, taskType) {
@@ -110,6 +110,11 @@ function inputHandler() {
     emptyInputMessage.className = 'emptyInputMessage';
     emptyInputMessage.textContent = 'Поле ввода пусто';
 
+    const highlightEvenElementButton = document.querySelector('.highlight-evenElement-button');
+    const highlightOddElementButton = document.querySelector('.highlight-oddElement-button');
+
+    // Все элементы li из списка todo
+    const todoListItems = document.querySelectorAll('.todo li');
 
     document.addEventListener('keydown', (event) => {
         if (document.activeElement !== userInput) {
@@ -154,6 +159,27 @@ function inputHandler() {
             emptyInputMessage.style.display = 'none';
             inputContainer.appendChild(emptyInputMessage);
         }
+    })
+
+    //action-panel buttons
+    highlightEvenElementButton.addEventListener('click', () => {
+        const isEvenHighlighted = todoListItems[1].style.color === 'red';
+        // Перебор всех элементов li и применение стиля к четным элементам
+        todoListItems.forEach((item, index) => {
+            if (index % 2 === 1) { // Четные элементы (индексы с 0)
+                item.style.color = isEvenHighlighted ? '' : 'red'; 
+            }
+        });
+    });
+
+    highlightOddElementButton.addEventListener('click', () => {
+        const isEvenHighlighted = todoListItems[0].style.color === 'red';
+        // Перебор всех элементов li и применение стиля к нечетным элементам
+        todoListItems.forEach((item, index) => {
+            if (index % 2 === 0) { // Нечетные элементы (индексы с 0)
+                item.style.color = isEvenHighlighted ? '' : 'red'; 
+            }
+        });
     })
 }
 

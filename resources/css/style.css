@@ -14,13 +14,22 @@
     font-display: swap;
 }
 
+:root {
+    --primary-bg-color: #38404B;
+    --secondary-bg-color: #94ADCF;
+}
+
 body {
     font-family: "Ubuntu";
-    background-color: #38404B;
+    background-color: var(--primary-bg-color);
+}
+
+h1 {
+    margin-left: 5vw;
 }
 
 h2 {
-    color: #94ADCF;
+    color: var(--secondary-bg-color);
     line-height: 28px;
 }
 
@@ -42,11 +51,11 @@ h2,
     box-shadow: inset -2px -2px 4px hsla(0, 0%, 100%, .1), inset 2px 2px 4px rgba(0, 0, 0, .35);
     border-radius: 16px 0 0 16px;
     padding: 20px;
-    color: #94ADCF;
+    color: var(--secondary-bg-color);
 }
 
 .styled-input::placeholder {
-    color: #94ADCF;
+    color: var(--secondary-bg-color);
 }
 
 .styled-input:focus {
@@ -62,25 +71,10 @@ h2,
     user-select: none;
 }
 
-.styled-input,
-.svg-button,
-.todo li,
-.completed li {
-    height: 44px;
-    border: none;
-    width: auto;
-    background-color: #38404B;
-}
-
 .emptyInputMessage {
     color:  #FF5733;
     position: absolute;
     left: 20vw;
-}
-
-.todo,
-.completed {
-    font-weight: 700;
 }
 
 .task-list {
@@ -91,14 +85,26 @@ h2,
     margin-left: 5vh;
 }
 
-/* todo style */
-.todo {
+.styled-input,
+.svg-button,
+.todo li,
+.completed li {
+    height: 44px;
+    border: none;
+    width: auto;
+    background-color: var(--primary-bg-color);
+}
+
+/* todo and completed style */
+.todo,
+.completed {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.todo li {
+.todo li,
+.completed li {
     box-shadow: -2px -2px 4px 2px hsla(0, 0%, 100%, .1), 2px 2px 4px 2px rgba(0, 0, 0, .35);
     border-radius: 16px;
     padding: 10px;/*50px*/
@@ -108,10 +114,18 @@ h2,
     margin: 5vh;
 }
 
-.todo li {
-    color: #94ADCF;
+.todo li,
+.completed li {
+    color: var(--secondary-bg-color);
+    font-weight: 700;
 }
 
+/* completed style */
+.completed li {
+    text-decoration: line-through;
+}
+
+/* buttons on task element */
 .check-button {
     float: left;
     margin-right: 20px;
@@ -129,27 +143,33 @@ h2,
     cursor: pointer;
     outline: none;
     height: 100%;
-    background-color: #38404B;
+    background-color: var(--primary-bg-color);
 }
 
-/* completed style */
-.completed {
+/* action-panel buttons */
+.action-panel {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    margin-top: 4vh;
+    gap: 40px;
 }
 
-.completed li {
-    box-shadow: -2px -2px 4px 2px hsla(0, 0%, 100%, .1), 2px 2px 4px 2px rgba(0, 0, 0, .35);
+.action-panel button {
+    width: 75px;
+    height: 25px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+
     border-radius: 16px;
-    padding: 10px;
-    outline: none;
-    width: 30vw;
-    min-height: 24px;
-    margin: 5vh;
+    box-shadow: -2px -2px 4px 2px hsla(0, 0%, 100%, .1), 2px 2px 4px 2px rgba(0, 0, 0, .35);
+    background-color: var(--primary-bg-color);
+    color: var(--secondary-bg-color);
 }
 
-.completed li {
-    color: #94ADCF;
-    text-decoration: line-through;
+.action-panel button:nth-child(3) {
+    font-size: 8px;
+}
+.action-panel button:nth-child(4) {
+    font-size: 9px;
 }
