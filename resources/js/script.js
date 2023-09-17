@@ -113,6 +113,9 @@ function inputHandler() {
     const highlightEvenElementButton = document.querySelector('.highlight-evenElement-button');
     const highlightOddElementButton = document.querySelector('.highlight-oddElement-button');
 
+    const delFirstElementButton = document.querySelector('.del-firstElement-button');
+    const delLastElementButton = document.querySelector('.del-lastElement-button');
+
     // Все элементы li из списка todo
     const todoListItems = document.querySelectorAll('.todo li');
 
@@ -181,6 +184,25 @@ function inputHandler() {
             }
         });
     })
+
+    delFirstElementButton.addEventListener('click', () => {
+        const todoList = document.querySelector('.task-list'); 
+        const firstListItem = todoList.querySelector('li'); 
+    
+        if (firstListItem) { 
+            removeItem(firstListItem);
+        }
+    });
+
+    delLastElementButton.addEventListener('click', () => {
+        const todoList = document.querySelector('.task-list');
+        const lastListItem = todoList.querySelector('li:last-child');
+
+        if(lastListItem) {
+            removeItem(lastListItem);
+        }
+    })
+    
 }
 
 function removeItem(itemToRemove) {
