@@ -3,26 +3,39 @@ const data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getIte
     completed: []
 };
 
+console.log(data);
+console.log(data.todo);
+console.log(data.completed);
+
 renderTodoList();
 inputHandler();
 
 
 function renderTodoList() {
-    if (!data.todo.length && data.completed.length) return;
+    if (!data.todo.length && !data.completed.length) return;
+
+    // Очистить контейнеры перед добавлением элементов
+    const todoListContainer = document.querySelector('.todo');
+    const completedListContainer = document.querySelector('.completed');
+    todoListContainer.innerHTML = '';
+    completedListContainer.innerHTML = '';
 
     for (let i = 0; i < data.todo.length; i++) {
         let value = data.todo[i];
         addItemToDOM(value, 'todo');
     }
 
-    for (let j = 0; j < data.todo.length; j++) {
-        let value = data.completed[i];
+    for (let j = 0; j < data.completed.length; j++) {
+        let value = data.completed[j];
         addItemToDOM(value, 'completed');
     }
 }
 
 function addItemToDOM(text, status) {
     let list = (status === 'completed') ? document.getElementById('completed') : document.getElementById('todo');
+
+    const todoList = document.querySelector('.todo');
+    const completed = document.querySelector('.completed');
 
     const listItem = document.createElement('li');
     listItem.innerText = text;
@@ -71,7 +84,7 @@ function addItemToDOM(text, status) {
     listItem.appendChild(delButton);
     todoList.appendChild(listItem);
 
-    list.insertBefore(todoList, list.childNodes[0]);
+    // list.insertBefore(listItem, list.childNodes[0]);
 }
 
 function saveTaskToLocalStorage(taskText, taskType) {
@@ -113,7 +126,13 @@ function inputHandler() {
 
     addButton.addEventListener('click', () => {
         if (userInput.value) {
-            
+            // сохранение userInput в data object, вызов render. Это для работы добавления элемента. 
+            // addItemTodoList(userInput.value);
+            // data = ...
+            saveTaskToLocalStorage(userInput.value, taskType = 'todo')
+            //возможно, после сохранения Task нужно заново вызывать рендер для обновления элементов
+            // (рендер)
+            renderTodoList()
             userInput.value = '';
         } else {
             emptyInputMessage.style.display = 'block';
