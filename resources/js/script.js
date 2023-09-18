@@ -38,23 +38,23 @@ function addItemToDOM(text, status) {
     checkButton.className = 'check-button';
     //svg
     const checkIcon = document.createElement('img');
-    checkIcon.src = './resources/assets/unCheckIcon.svg';
+    (status === 'todo') ? checkIcon.src = './resources/assets/unCheckIcon.svg' : checkIcon.src = './resources/assets/CheckIcon.svg';
     checkIcon.alt = 'Check Icon';
     checkButton.appendChild(checkIcon);
 
     checkButton.addEventListener('click', () => {
         if (todoList.contains(listItem)) {
             completed.appendChild(listItem);
-            listItem.classList.add('.completed')
-            checkIcon.src = './resources/assets/CheckIcon.svg';
             saveTaskToLocalStorage(text, taskType = 'completed');
+
+            checkIcon.src = './resources/assets/CheckIcon.svg';
 
             data.todo.splice(data.todo.indexOf(text), 1);
             dataObjectUpdated();
 
         } else if (completed.contains(listItem)) {
             todoList.appendChild(listItem);
-            listItem.classList.add('.todo')
+
             checkIcon.src = './resources/assets/unCheckIcon.svg';
             saveTaskToLocalStorage(text, taskType = 'todo');
 
@@ -162,15 +162,25 @@ function inputHandler() {
     })
 
     //action-panel buttons
+    // highlightEvenElementButton.addEventListener('click', () => {
+    //     const isEvenHighlighted = todoListItems[1].style.color === 'red';
+    //     // Перебор всех элементов li и применение стиля к четным элементам
+    //     todoListItems.forEach((item, index) => {
+    //         if (index % 2 === 1) { // Четные элементы (индексы с 0)
+    //             item.style.color = isEvenHighlighted ? '' : 'red';
+    //         }
+    //     });
+    // });
     highlightEvenElementButton.addEventListener('click', () => {
-        const isEvenHighlighted = todoListItems[1].style.color === 'red';
         // Перебор всех элементов li и применение стиля к четным элементам
         todoListItems.forEach((item, index) => {
-            if (index % 2 === 1) { // Четные элементы (индексы с 0)
+            if (index % 2 === 1 && item) { // Проверка на существование элемента
+                const isEvenHighlighted = item.style.color === 'red';
                 item.style.color = isEvenHighlighted ? '' : 'red';
             }
         });
     });
+
 
     highlightOddElementButton.addEventListener('click', () => {
         const isEvenHighlighted = todoListItems[0].style.color === 'red';
@@ -182,6 +192,7 @@ function inputHandler() {
         });
     })
 
+    //action-panel del buttons
     delFirstElementButton.addEventListener('click', () => {
         const todoList = document.querySelector('.task-list');
         const firstListItem = todoList.querySelector('li');
@@ -192,11 +203,15 @@ function inputHandler() {
     });
 
     delLastElementButton.addEventListener('click', () => {
-        const todoList = document.querySelector('.task-list');
-        const lastListItem = todoList.querySelector('li:last-child');
+        const completedList = document.querySelector('.completed');
+        const lastCompletedItem = completedList.querySelector('li:last-child');
+        const todoList = document.querySelector('.todo');
+        const lastTodoItem = todoList.querySelector('li:last-child');
 
-        if (lastListItem) {
-            removeItem(lastListItem);
+        if (lastCompletedItem) {
+            removeItem(lastCompletedItem);
+        } else if(lastTodoItem) {
+            removeItem(lastTodoItem);
         }
     })
 
