@@ -36,5 +36,5 @@
 1. Склонируйте репозиторий на свой компьютер:
 
 ```shell
-git clone https://github.com/your-username/todo-list.git
+git clone https://github.com/MblLLI16/todo-list.git
 
