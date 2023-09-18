@@ -33,12 +33,38 @@ h2 {
     line-height: 28px;
 }
 
+/* input-container style */
 .input-container {
-    display: flex;
-    align-items: center;
     width: 40vw;
     margin: 0 auto;
     position: relative;
+}
+
+.input-container {
+    flex: 1;
+    box-shadow: inset -2px -2px 4px hsla(0, 0%, 100%, .1), inset 2px 2px 4px rgba(0, 0, 0, .35);
+    border-radius: 16px;
+    padding: 10 0px;
+    color: var(--secondary-bg-color);
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    border: none;
+    background-color: var(--primary-bg-color);
+    padding-left: 10px;
+}
+
+/* input style */
+.styled-input {
+    flex: 1;
+    border: none;
+    padding: none;
+    width: auto;
+    background-color: var(--primary-bg-color);
+    color: var(--secondary-bg-color);
 }
 
 h2,
@@ -46,12 +72,18 @@ h2,
     font-weight: 400;
 }
 
-.styled-input {
-    flex: 1;
-    box-shadow: inset -2px -2px 4px hsla(0, 0%, 100%, .1), inset 2px 2px 4px rgba(0, 0, 0, .35);
-    border-radius: 16px 0 0 16px;
-    padding: 20px;
-    color: var(--secondary-bg-color);
+/* input button style */
+.svg-button {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.svg-button {
+    border: none;
+    cursor: pointer;
+    outline: none;
+    height: auto;
+    background-color: var(--primary-bg-color);
 }
 
 .styled-input::placeholder {
@@ -60,15 +92,6 @@ h2,
 
 .styled-input:focus {
     outline: none;
-}
-
-.svg-button {
-    box-shadow: inset -2px -2px 4px hsla(0, 0%, 100%, .1), inset 2px 2px 4px rgba(0, 0, 0, .35);
-    border-radius: 0 16px 16px 0;
-    padding: 10px;
-    cursor: pointer;
-    outline: none;
-    user-select: none;
 }
 
 .emptyInputMessage {
@@ -85,8 +108,6 @@ h2,
     margin-left: 5vh;
 }
 
-.styled-input,
-.svg-button,
 .todo li,
 .completed li {
     height: 44px;
