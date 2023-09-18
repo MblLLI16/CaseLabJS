@@ -114,7 +114,7 @@ function inputHandler() {
     const delLastElementButton = document.querySelector('.del-lastElement-button');
 
     // Все элементы li из списка todo
-    const todoListItems = document.querySelectorAll('.todo li');
+    const todoListItems = document.querySelectorAll('.task-list li');
 
     document.addEventListener('keydown', (event) => {
         if (document.activeElement !== userInput) {
@@ -162,27 +162,23 @@ function inputHandler() {
     })
 
     //action-panel buttons
-    // highlightEvenElementButton.addEventListener('click', () => {
-    //     const isEvenHighlighted = todoListItems[1].style.color === 'red';
-    //     // Перебор всех элементов li и применение стиля к четным элементам
-    //     todoListItems.forEach((item, index) => {
-    //         if (index % 2 === 1) { // Четные элементы (индексы с 0)
-    //             item.style.color = isEvenHighlighted ? '' : 'red';
-    //         }
-    //     });
-    // });
     highlightEvenElementButton.addEventListener('click', () => {
+        // Обновление списка todoListItems после изменений
+        const todoListItems = document.querySelectorAll('.task-list li');
+
+        const isEvenHighlighted = todoListItems[1].style.color === 'red';
         // Перебор всех элементов li и применение стиля к четным элементам
         todoListItems.forEach((item, index) => {
-            if (index % 2 === 1 && item) { // Проверка на существование элемента
-                const isEvenHighlighted = item.style.color === 'red';
+            if (index % 2 === 1) { // Четные элементы (индексы с 0)
                 item.style.color = isEvenHighlighted ? '' : 'red';
             }
         });
     });
 
-
     highlightOddElementButton.addEventListener('click', () => {
+        // Обновление списка todoListItems после изменений
+        const todoListItems = document.querySelectorAll('.task-list li');
+        
         const isEvenHighlighted = todoListItems[0].style.color === 'red';
         // Перебор всех элементов li и применение стиля к нечетным элементам
         todoListItems.forEach((item, index) => {
@@ -210,7 +206,7 @@ function inputHandler() {
 
         if (lastCompletedItem) {
             removeItem(lastCompletedItem);
-        } else if(lastTodoItem) {
+        } else if (lastTodoItem) {
             removeItem(lastTodoItem);
         }
     })
